@@ -51,7 +51,7 @@ const useFetch = ({ name, role, skills, goal, isDone, setIsDone }) => {
     if (name && role && skills && goal && isDone) {
       fetchData();
     }
-  }, [name, role, skills, goal, isDone]);
+  }, [isDone]);
 
   return { isLoading, data };
 };
