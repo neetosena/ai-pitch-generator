@@ -4,12 +4,10 @@ import React, { useEffect, useState } from "react";
 const useFetch = ({ name, role, skills, goal, isDone, setIsDone }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
-  const API_URL =
-    "https://router.huggingface.co/novita/v3/openai/chat/completions";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -39,7 +37,6 @@ const useFetch = ({ name, role, skills, goal, isDone, setIsDone }) => {
         response.data.choices[0]?.message?.content || "No pitch generated."
       );
     } catch (err) {
-      setError(err);
       console.log(err);
     } finally {
       setIsLoading(false);
