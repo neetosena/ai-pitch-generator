@@ -26,10 +26,17 @@ const useFetch = ({ name, role, skills, goal, isDone, setIsDone }) => {
           },
         }
       );
+      console.log("Full Lambda response:", response.data);
+      const parseBody =
+        typeof response.data.body === "string"
+          ? JSON.parse(response.data.body)
+          : response.data.body;
 
-      setData(response.data?.content || "No pitch generated.");
+      console.log("parseBody: ", parseBody);
+      setData(parseBody?.message || "No pitch generated.");
     } catch (err) {
       console.log(err);
+      console.error("Fetch error:", err.response?.data || err.message);
       setData("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
